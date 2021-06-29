@@ -6,3 +6,4 @@
 ###5.  [naming] rename p to price in LineItem
 ###6. [extract] extract initReceiptHeader method
 ###7. [extract] extract addReceiptContent method
+###8.[feature envy] move getSalesTax  to class LineItem

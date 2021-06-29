@@ -48,7 +48,7 @@ public class OrderReceipt {
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             addReceiptContent(lineItem);
-            double salesTax = lineItem.totalAmount() * ORDER_TAX_RATE;
+            double salesTax = lineItem.getSalesTax(ORDER_TAX_RATE);
             totalSalesTax += salesTax;
 
             totalAmount += lineItem.totalAmount() + salesTax;
