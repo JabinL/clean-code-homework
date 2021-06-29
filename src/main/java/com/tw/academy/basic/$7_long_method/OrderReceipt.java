@@ -29,21 +29,25 @@ public class OrderReceipt {
         receipt.append(order.getCustomerAddress());
     }
 
+    private void addReceiptContent(LineItem lineItem) {
+        receipt.append(lineItem.getDescription());
+        receipt.append(TAB_CHAR);
+        receipt.append(lineItem.getPrice());
+        receipt.append(TAB_CHAR);
+        receipt.append(lineItem.getQuantity());
+        receipt.append(TAB_CHAR);
+        receipt.append(lineItem.totalAmount());
+        receipt.append(LINE_BREAK_CHAR);
+
+    }
+
     public String printReceipt() {
 
         initReceiptHeader();
         double totalSalesTax = 0d;
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
-            receipt.append(lineItem.getDescription());
-            receipt.append(TAB_CHAR);
-            receipt.append(lineItem.getPrice());
-            receipt.append(TAB_CHAR);
-            receipt.append(lineItem.getQuantity());
-            receipt.append(TAB_CHAR);
-            receipt.append(lineItem.totalAmount());
-            receipt.append(LINE_BREAK_CHAR);
-
+            addReceiptContent(lineItem);
             double salesTax = lineItem.totalAmount() * ORDER_TAX_RATE;
             totalSalesTax += salesTax;
 
@@ -51,7 +55,6 @@ public class OrderReceipt {
         }
 
         receipt.append(ORDER_RECEIPT_SALES_TAX).append(TAB_CHAR).append(totalSalesTax);
-
         receipt.append(ORDER_RECEIPT_TOTAL_AMOUNT).append(TAB_CHAR).append(totalAmount);
         return receipt.toString();
     }
