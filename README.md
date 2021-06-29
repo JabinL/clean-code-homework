@@ -4,3 +4,4 @@
 ###3. [magic number]eliminate magic number in OrderReceipt
 ###4. [naming] rename unmeaningful names in OrderReceipt
 ###5.  [naming] rename p to price in LineItem
+###6. [extract] extract initReceiptHeader method
