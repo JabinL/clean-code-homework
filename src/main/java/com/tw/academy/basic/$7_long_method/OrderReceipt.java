@@ -13,6 +13,8 @@ public class OrderReceipt {
     public static final String ORDER_RECEIPT_SALES_TAX = "Sales Tax";
     public static final String ORDER_RECEIPT_TOTAL_AMOUNT = "Total Amount";
     public static final double ORDER_TAX_RATE = .10;
+    public static final char TAB_CHAR = '\t';
+    public static final char LINE_BREAK_CHAR = '\n';
 
     public OrderReceipt(Order order) {
         this.order = order;
@@ -30,13 +32,13 @@ public class OrderReceipt {
         double tot = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription());
-            output.append('\t');
+            output.append(TAB_CHAR);
             output.append(lineItem.getPrice());
-            output.append('\t');
+            output.append(TAB_CHAR);
             output.append(lineItem.getQuantity());
-            output.append('\t');
+            output.append(TAB_CHAR);
             output.append(lineItem.totalAmount());
-            output.append('\n');
+            output.append(LINE_BREAK_CHAR);
 
             double salesTax = lineItem.totalAmount() * ORDER_TAX_RATE;
             totSalesTx += salesTax;
@@ -44,9 +46,9 @@ public class OrderReceipt {
             tot += lineItem.totalAmount() + salesTax;
         }
 
-        output.append(ORDER_RECEIPT_SALES_TAX).append('\t').append(totSalesTx);
+        output.append(ORDER_RECEIPT_SALES_TAX).append(TAB_CHAR).append(totSalesTx);
 
-        output.append(ORDER_RECEIPT_TOTAL_AMOUNT).append('\t').append(tot);
+        output.append(ORDER_RECEIPT_TOTAL_AMOUNT).append(TAB_CHAR).append(tot);
         return output.toString();
     }
 }
